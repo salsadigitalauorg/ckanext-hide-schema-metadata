@@ -1,0 +1,17 @@
+{% ckan_extends %}
+
+{%- block resource_fields -%}
+
+  {%- if 'schema' not in res -%}
+    {%- do exclude_fields.append('schema') -%}
+    {%- do exclude_fields.append('validation_options') -%}
+    {%- do exclude_fields.append('validation_status') -%}
+    {%- do exclude_fields.append('validation_timestamp') -%}
+  {%- endif -%}
+
+  {%- if 'validation_options' not in res and 'validation_options' not in exclude_fields -%}
+    {%- do exclude_fields.append('validation_options') -%}
+  {%- endif -%}
+
+ {{ super() }}
+{%- endblock -%}
